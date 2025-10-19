@@ -1,0 +1,45 @@
+// Variables
+$primary-color: #8b4513;
+$secondary-color: #d2691e;
+$light-bg: #f8f9fa;
+$dark-text: #333;
+
+// Mixins
+@mixin card-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Global styles
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: $dark-text;
+}
+
+// Custom Bootstrap overrides
+.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    border-color: darken($primary-color, 10%);
+  }
+}
+
+.card {
+  @include card-shadow;
+  border: none;
+}
+
+// Navbar customization
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+// Page-specific styles will be added in Phase 3
