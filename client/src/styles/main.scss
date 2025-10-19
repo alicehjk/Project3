@@ -1,45 +1,99 @@
-// Variables
-$primary-color: #8b4513;
-$secondary-color: #d2691e;
-$light-bg: #f8f9fa;
-$dark-text: #333;
+// Hayan color palette
+$warm-yellow: #FFF0AF;
+$cream: #FFFDF2;
+$lemon-yellow: #FEF0AF;
+$butter-yellow: #FFF0AE;
+$beige-accent: #BEB487;
 
-// Mixins
+$primary-color: $warm-yellow;
+$secondary-color: $butter-yellow;
+$accent-color: $beige-accent;
+$dark-text: #2d2d2d;
+$light-text: #5a5a5a;
+
 @mixin card-shadow {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: box-shadow 0.3s ease;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   }
 }
 
-// Global styles
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: $dark-text;
+  background-color: $cream;
 }
 
-// Custom Bootstrap overrides
 .btn-primary {
   background-color: $primary-color;
-  border-color: $primary-color;
+  border-color: $accent-color;
+  color: $dark-text;
+  font-weight: 500;
 
   &:hover {
-    background-color: darken($primary-color, 10%);
-    border-color: darken($primary-color, 10%);
+    background-color: darken($primary-color, 5%);
+    border-color: darken($accent-color, 10%);
+    color: $dark-text;
+  }
+}
+
+.btn-outline-primary {
+  color: $dark-text;
+  border-color: $accent-color;
+
+  &:hover {
+    background-color: $primary-color;
+    border-color: $accent-color;
+    color: $dark-text;
   }
 }
 
 .card {
   @include card-shadow;
-  border: none;
+  border: 1px solid rgba(190, 180, 135, 0.2);
+  background-color: white;
 }
 
-// Navbar customization
+.navbar-dark {
+  background-color: $warm-yellow !important;
+}
+
 .navbar-brand {
   font-weight: bold;
   font-size: 1.5rem;
+  color: $dark-text !important;
 }
 
-// Page-specific styles will be added in Phase 3
+.nav-link {
+  color: $dark-text !important;
+
+  &:hover {
+    color: lighten($dark-text, 20%) !important;
+  }
+}
+
+.container {
+  max-width: 1200px;
+}
+
+.display-3 {
+  color: $dark-text;
+}
+
+.lead {
+  color: $light-text;
+}
+
+.form-control:focus {
+  border-color: $accent-color;
+  box-shadow: 0 0 0 0.2rem rgba(190, 180, 135, 0.25);
+}
+
+.badge {
+  &.bg-success {
+    background-color: $accent-color !important;
+    color: $dark-text;
+  }
+}
