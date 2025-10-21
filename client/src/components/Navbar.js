@@ -39,23 +39,27 @@ function Navbar() {
                 Products
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart">
-                Cart {getItemCount() > 0 && `(${getItemCount()})`}
-              </Link>
-            </li>
+
+            {(!isAuthenticated || user?.role !== 'admin') && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/cart">
+                  Cart {getItemCount() > 0 && `(${getItemCount()})`}
+                </Link>
+              </li>
+            )}
 
             {isAuthenticated ? (
               <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/orders">
-                    My Orders
-                  </Link>
-                </li>
-                {user?.role === 'admin' && (
+                {user?.role === 'admin' ? (
                   <li className="nav-item">
                     <Link className="nav-link" to="/admin">
                       Admin
+                    </Link>
+                  </li>
+                ) : (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/orders">
+                      My Orders
                     </Link>
                   </li>
                 )}

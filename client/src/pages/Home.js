@@ -7,7 +7,7 @@ function Home() {
       <div className="text-center">
         <h1 className="display-3 mb-4">Hayan Bakery</h1>
         <p className="lead mb-4">
-          Fresh Korean breads and pastries baked daily
+          Fresh Korean breads and Desserts baked daily
         </p>
         <div className="d-flex gap-3 justify-content-center">
           <Link to="/products" className="btn btn-primary btn-lg">
@@ -30,8 +30,8 @@ function Home() {
           <div class="col-md-4">
             <div class="card">
               <div class="card-body text-center">
-                <h3>Pastries</h3>
-                <p>Sweet and savory baked goods</p>
+                <h3>Desserts</h3>
+                <p>Sweet baked goods</p>
               </div>
             </div>
           </div>
