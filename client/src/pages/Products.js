@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { productService } from '../services/productService';
+import { useCart } from '../context/CartContext';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -7,6 +8,7 @@ function Products() {
   const [error, setError] = useState('');
   const [category, setCategory] = useState('');
   const [search, setSearch] = useState('');
+  const { addToCart } = useCart();
 
   useEffect(() => {
     fetchProducts();
@@ -90,6 +92,15 @@ function Products() {
                     <span className={`badge ${product.available ? 'bg-success' : 'bg-secondary'}`}>
                       {product.available ? 'Available' : 'Unavailable'}
                     </span>
+                  </div>
+                  <div className="card-footer bg-white border-0">
+                    <button
+                      className="btn btn-primary w-100"
+                      onClick={() => addToCart(product)}
+                      disabled={!product.available}
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               </div>

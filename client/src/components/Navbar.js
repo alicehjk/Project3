@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 
 function Navbar() {
   const { user, logout, isAuthenticated } = useAuth();
+  const { getItemCount } = useCart();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -35,6 +37,11 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="/products">
                 Products
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">
+                Cart {getItemCount() > 0 && `(${getItemCount()})`}
               </Link>
             </li>
 
