@@ -11,6 +11,9 @@ import Products from './pages/Products';
 import Orders from './pages/Orders';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import AdminDashboard from './pages/Admin/Dashboard';
+import ProductManagement from './pages/Admin/ProductManagement';
+import OrderManagement from './pages/Admin/OrderManagement';
 
 function App() {
   return (
@@ -38,6 +41,30 @@ function App() {
                 element={
                   <PrivateRoute>
                     <Orders />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/admin"
+                element={
+                  <PrivateRoute adminOnly={true}>
+                    <AdminDashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/admin/products"
+                element={
+                  <PrivateRoute adminOnly={true}>
+                    <ProductManagement />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/admin/orders"
+                element={
+                  <PrivateRoute adminOnly={true}>
+                    <OrderManagement />
                   </PrivateRoute>
                 }
               />

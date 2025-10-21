@@ -13,9 +13,6 @@ function Home() {
           <Link to="/products" className="btn btn-primary btn-lg">
             Browse Menu
           </Link>
-          <Link to="/register" className="btn btn-outline-primary btn-lg">
-            Sign Up
-          </Link>
         </div>
       </div>
 
