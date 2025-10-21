@@ -39,6 +39,11 @@ function Navbar() {
                 Products
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/locations">
+                Locations
+              </Link>
+            </li>
 
             {(!isAuthenticated || user?.role !== 'admin') && (
               <li className="nav-item">
