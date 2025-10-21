@@ -51,8 +51,7 @@ function Products() {
           >
             <option value="">All Categories</option>
             <option value="bread">Bread</option>
-            <option value="pastry">Pastry</option>
-            <option value="cake">Cake</option>
+            <option value="dessert">Dessert</option>
             <option value="special">Special</option>
           </select>
         </div>

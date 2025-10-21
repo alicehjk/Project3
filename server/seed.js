@@ -6,68 +6,85 @@ dotenv.config();
 
 const sampleProducts = [
   {
-    name: 'Traditional Sourdough',
-    description: 'Classic Korean-style sourdough with a crispy crust and soft interior',
+    name: 'Hayan Pullman Loaf',
+    description: 'Our signature milk loaf made with levain, tangzhong, and butter. Soft, chewy, and deeply milky in flavor.',
     category: 'bread',
-    price: 12.99,
+    price: 15.0,
     available: true,
-    ingredients: ['flour', 'water', 'salt', 'sourdough starter']
+    ingredients: ['flour', 'milk', 'butter', 'sugar', 'salt', 'levain', 'yeast']
   },
   {
-    name: 'Red Bean Pastry',
-    description: 'Sweet pastry filled with traditional red bean paste',
-    category: 'pastry',
-    price: 4.99,
-    available: true,
-    ingredients: ['flour', 'red bean', 'sugar', 'butter']
-  },
-  {
-    name: 'Cream Cheese Bread',
-    description: 'Soft brioche filled with cream cheese',
+    name: 'Overnight Milk Pullman Loaf',
+    description: 'Classic Korean-style milk loaf made entirely with milk for an ultra-soft, fluffy texture and buttery aroma.',
     category: 'bread',
-    price: 5.99,
+    price: 15.0,
     available: true,
-    ingredients: ['flour', 'cream cheese', 'sugar', 'eggs', 'butter']
+    ingredients: ['flour', 'milk', 'butter', 'sugar', 'salt', 'yeast']
   },
   {
-    name: 'Financier',
-    description: 'French almond cake with a delicate texture',
-    category: 'pastry',
-    price: 3.99,
-    available: true,
-    ingredients: ['almond flour', 'butter', 'egg whites', 'sugar']
-  },
-  {
-    name: 'Croissant',
-    description: 'Buttery, flaky croissant made fresh daily',
-    category: 'pastry',
-    price: 4.50,
-    available: true,
-    ingredients: ['flour', 'butter', 'yeast', 'milk']
-  },
-  {
-    name: 'Chocolate Cake',
-    description: 'Rich chocolate cake with ganache frosting',
-    category: 'cake',
-    price: 35.00,
-    available: true,
-    ingredients: ['chocolate', 'flour', 'eggs', 'sugar', 'butter']
-  },
-  {
-    name: 'Milk Bread',
-    description: 'Soft and fluffy Japanese-style milk bread',
+    name: 'Cream Loaf',
+    description: 'Rich, pastry-like loaf made with heavy cream and tangzhong. Melts in your mouth while keeping Hayan’s signature chew.',
     category: 'bread',
-    price: 8.99,
+    price: 15.0,
     available: true,
-    ingredients: ['flour', 'milk', 'sugar', 'butter', 'yeast']
+    ingredients: ['flour', 'heavy cream', 'butter', 'sugar', 'salt', 'levain', 'yeast']
+  },
+
+  {
+    name: 'Madeleine Lemon Vanilla',
+    description: 'Soft, sweet lemon vanilla bean cake with a bright lemon glaze and a hint of rum.',
+    category: 'dessert',
+    price: 3.5,
+    available: true,
+    ingredients: ['flour', 'butter', 'eggs', 'honey', 'sugar', 'lemon', 'vanilla', 'rum']
   },
   {
-    name: 'Seasonal Special',
-    description: 'Chef\'s special creation - changes weekly',
-    category: 'special',
-    price: 15.99,
-    available: false,
-    ingredients: ['seasonal ingredients']
+    name: 'Madeleine Earl Grey',
+    description: 'Delicate Earl Grey madeleine with tea leaves, tea glaze, and cornflower petals.',
+    category: 'dessert',
+    price: 3.5,
+    available: true,
+    ingredients: ['flour', 'butter', 'eggs', 'honey', 'sugar', 'Earl Grey tea', 'cornflower']
+  },
+  {
+    name: 'Madeleine Yuza',
+    description: 'Buttery cake infused with Korean yuza and honey, topped with a glossy citrus glaze.',
+    category: 'dessert',
+    price: 3.5,
+    available: true,
+    ingredients: ['flour', 'butter', 'eggs', 'honey', 'sugar', 'yuza']
+  },
+  {
+    name: 'Financier Classic Almond',
+    description: 'Rich French almond cake made with browned grass-fed butter and amaretto. Crisp edges, chewy center.',
+    category: 'dessert',
+    price: 3.5,
+    available: true,
+    ingredients: ['almond flour', 'butter', 'egg whites', 'sugar', 'amaretto']
+  },
+  {
+    name: 'Financier White Chocolate Matcha',
+    description: 'Bold matcha financier coated in creamy matcha white chocolate for a balanced finish.',
+    category: 'dessert',
+    price: 3.75,
+    available: true,
+    ingredients: ['almond flour', 'butter', 'egg whites', 'sugar', 'matcha', 'white chocolate']
+  },
+  {
+    name: 'Financier Caramel Hazelnut',
+    description: 'Soft almond financier with roasted hazelnuts and homemade golden butter caramel.',
+    category: 'dessert',
+    price: 4.0,
+    available: true,
+    ingredients: ['almond flour', 'butter', 'egg whites', 'sugar', 'hazelnut', 'caramel']
+  },
+  {
+    name: 'Galette Bretonne',
+    description: 'Crisp, buttery French shortbread made with real butter and a touch of flaky sea salt.',
+    category: 'dessert',
+    price: 3.5,
+    available: true,
+    ingredients: ['flour', 'butter', 'sugar', 'egg yolk', 'sea salt']
   }
 ];
 
