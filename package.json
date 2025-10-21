@@ -2,7 +2,7 @@
   "name": "hayan-bakery",
   "version": "1.0.0",
   "description": "Hayan Bakery SPA - Korean-inspired bakery website",
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
