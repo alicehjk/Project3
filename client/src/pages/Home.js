@@ -19,28 +19,32 @@ function Home() {
         </div>
       </div>
 
-      <div className="row mt-5">
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-body">
-              <h3>Sourdough</h3>
-              <p>Korean-style sourdough bread</p>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body text-center">
+                <h3>Milk Bread</h3>
+                <p>Korean-style bread</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-body">
-              <h3>Pastries</h3>
-              <p>Sweet and savory baked goods</p>
+
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body text-center">
+                <h3>Pastries</h3>
+                <p>Sweet and savory baked goods</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-body">
-              <h3>Order Ahead</h3>
-              <p>Place your order for pickup</p>
+
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body text-center">
+                <h3>Order Ahead</h3>
+                <p>Place your order for pickup</p>
+              </div>
             </div>
           </div>
         </div>

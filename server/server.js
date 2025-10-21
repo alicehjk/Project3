@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const connectDB = require('./config/db');
 
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, '../.env') });
 connectDB();
 
 const app = express();
