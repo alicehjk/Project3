@@ -255,8 +255,7 @@ function Checkout() {
               <hr />
               <p className="mb-2">
                 <strong>Address:</strong><br />
-                123 Bakery Lane<br />
-                Irvine, CA 92618
+                Laguna Niguel, CA 92677
               </p>
               <p className="mb-2">
                 <strong>Phone:</strong><br />
