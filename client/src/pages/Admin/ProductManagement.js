@@ -13,10 +13,12 @@ function ProductManagement() {
     description: '',
     category: 'bread',
     price: '',
-    image: '/images/default-product.jpg',
+    image: '/images/default-product.svg',
     available: true,
     ingredients: ''
   });
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
     fetchProducts();
@@ -42,31 +44,58 @@ function ProductManagement() {
     });
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      // Create preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
     try {
-      const productData = {
-        ...formData,
-        price: parseFloat(formData.price),
-        ingredients: formData.ingredients.split(',').map(i => i.trim()).filter(i => i)
-      };
+      // Create FormData to handle file upload
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('description', formData.description);
+      formDataToSend.append('category', formData.category);
+      formDataToSend.append('price', parseFloat(formData.price));
+      formDataToSend.append('available', formData.available);
+
+      const ingredients = formData.ingredients.split(',').map(i => i.trim()).filter(i => i);
+      formDataToSend.append('ingredients', JSON.stringify(ingredients));
+
+      // Add image file if selected
+      if (imageFile) {
+        formDataToSend.append('image', imageFile);
+      } else if (!editingProduct) {
+        formDataToSend.append('image', formData.image);
+      }
 
       if (editingProduct) {
-        await productService.updateProduct(editingProduct._id, productData);
+        await productService.updateProduct(editingProduct._id, formDataToSend);
       } else {
-        await productService.createProduct(productData);
+        await productService.createProduct(formDataToSend);
       }
 
       setShowForm(false);
       setEditingProduct(null);
+      setImageFile(null);
+      setImagePreview(null);
       setFormData({
         name: '',
         description: '',
         category: 'bread',
         price: '',
-        image: '/images/default-product.jpg',
+        image: '/images/default-product.svg',
         available: true,
         ingredients: ''
       });
@@ -87,6 +116,10 @@ function ProductManagement() {
       available: product.available,
       ingredients: product.ingredients?.join(', ') || ''
     });
+    // Set the existing image as preview when editing
+    if (product.image) {
+      setImagePreview(product.image);
+    }
     setShowForm(true);
   };
 
@@ -104,12 +137,14 @@ function ProductManagement() {
   const handleCancel = () => {
     setShowForm(false);
     setEditingProduct(null);
+    setImageFile(null);
+    setImagePreview(null);
     setFormData({
       name: '',
       description: '',
       category: 'bread',
       price: '',
-      image: '/images/default-product.jpg',
+      image: '/images/default-product.svg',
       available: true,
       ingredients: ''
     });
@@ -178,15 +213,42 @@ function ProductManagement() {
                 </div>
 
                 <div className="col-md-6 mb-3">
-                  <label className="form-label">Image URL</label>
+                  <label className="form-label">Upload Product Image</label>
                   <input
-                    type="text"
+                    type="file"
                     className="form-control"
-                    name="image"
-                    value={formData.image}
-                    onChange={handleChange}
+                    accept="image/*"
+                    onChange={handleFileChange}
                   />
+                  <small className="text-muted">Upload an image (max 5MB)</small>
                 </div>
+
+                {imagePreview && (
+                  <div className="col-12 mb-3">
+                    <label className="form-label">
+                      {editingProduct && !imageFile ? 'Current Image' : 'Image Preview'}
+                    </label>
+                    <div>
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'cover' }}
+                        className="border rounded"
+                        onError={(e) => {
+                          if (!e.target.src.includes('default-product.svg')) {
+                            e.target.onerror = null;
+                            e.target.src = '/images/default-product.svg';
+                          }
+                        }}
+                      />
+                    </div>
+                    {editingProduct && !imageFile && (
+                      <small className="text-muted d-block mt-2">
+                        Upload a new image to replace the current one
+                      </small>
+                    )}
+                  </div>
+                )}
 
                 <div className="col-12 mb-3">
                   <label className="form-label">Description *</label>
@@ -253,6 +315,7 @@ function ProductManagement() {
           <table className="table table-striped">
             <thead>
               <tr>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Price</th>
@@ -263,6 +326,20 @@ function ProductManagement() {
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
+                  <td>
+                    <img
+                      src={product.image || '/images/default-product.svg'}
+                      alt={product.name}
+                      style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+                      className="rounded"
+                      onError={(e) => {
+                        if (!e.target.src.includes('default-product.svg')) {
+                          e.target.onerror = null;
+                          e.target.src = '/images/default-product.svg';
+                        }
+                      }}
+                    />
+                  </td>
                   <td>{product.name}</td>
                   <td>{product.category}</td>
                   <td>${product.price.toFixed(2)}</td>

@@ -12,12 +12,20 @@ export const productService = {
   },
 
   createProduct: async (productData) => {
-    const response = await API.post('/products', productData);
+    // Remove Content-Type header for FormData so axios can set it with boundary
+    const config = productData instanceof FormData
+      ? { headers: { 'Content-Type': undefined } }
+      : undefined;
+    const response = await API.post('/products', productData, config);
     return response.data;
   },
 
   updateProduct: async (id, productData) => {
-    const response = await API.put(`/products/${id}`, productData);
+    // Remove Content-Type header for FormData so axios can set it with boundary
+    const config = productData instanceof FormData
+      ? { headers: { 'Content-Type': undefined } }
+      : undefined;
+    const response = await API.put(`/products/${id}`, productData, config);
     return response.data;
   },
 

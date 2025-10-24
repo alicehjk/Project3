@@ -8,14 +8,15 @@ const {
   deleteProduct
 } = require('../controllers/productController');
 const { protect, authorize } = require('../middleware/auth');
+const upload = require('../config/multer');
 
 router.route('/')
   .get(getProducts)
-  .post(protect, authorize('admin'), createProduct);
+  .post(protect, authorize('admin'), upload.single('image'), createProduct);
 
 router.route('/:id')
   .get(getProductById)
-  .put(protect, authorize('admin'), updateProduct)
+  .put(protect, authorize('admin'), upload.single('image'), updateProduct)
   .delete(protect, authorize('admin'), deleteProduct);
 
 module.exports = router;

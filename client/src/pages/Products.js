@@ -78,10 +78,16 @@ function Products() {
               <div key={product._id} className="col-md-4 mb-4">
                 <div className="card h-100">
                   <img
-                    src={product.image}
+                    src={product.image || '/images/default-product.svg'}
                     className="card-img-top"
                     alt={product.name}
                     style={{ height: '200px', objectFit: 'cover' }}
+                    onError={(e) => {
+                      if (!e.target.src.includes('default-product.svg')) {
+                        e.target.onerror = null;
+                        e.target.src = '/images/default-product.svg';
+                      }
+                    }}
                   />
                   <div className="card-body">
                     <h5 className="card-title">{product.name}</h5>

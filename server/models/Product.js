@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: '/images/default-product.jpg'
+    default: '/images/default-product.svg'
   },
   available: {
     type: Boolean,

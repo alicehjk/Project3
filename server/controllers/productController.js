@@ -27,7 +27,23 @@ exports.getProductById = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
   try {
-    const product = await Product.create(req.body);
+    const productData = req.body;
+
+    // Parse ingredients if it's a JSON string
+    if (productData.ingredients && typeof productData.ingredients === 'string') {
+      try {
+        productData.ingredients = JSON.parse(productData.ingredients);
+      } catch (e) {
+        productData.ingredients = [];
+      }
+    }
+
+    // If file was uploaded, use the uploaded file path
+    if (req.file) {
+      productData.image = `/uploads/products/${req.file.filename}`;
+    }
+
+    const product = await Product.create(productData);
     res.status(201).json(product);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -36,9 +52,25 @@ exports.createProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   try {
+    const productData = req.body;
+
+    // Parse ingredients if it's a JSON string
+    if (productData.ingredients && typeof productData.ingredients === 'string') {
+      try {
+        productData.ingredients = JSON.parse(productData.ingredients);
+      } catch (e) {
+        productData.ingredients = [];
+      }
+    }
+
+    // If file was uploaded, use the uploaded file path
+    if (req.file) {
+      productData.image = `/uploads/products/${req.file.filename}`;
+    }
+
     const product = await Product.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      productData,
       { new: true, runValidators: true }
     );
     if (!product) return res.status(404).json({ message: 'Product not found' });
