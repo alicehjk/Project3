@@ -5,7 +5,7 @@ import { useCart } from '../context/CartContext';
 
 function Navbar() {
   const { user, logout, isAuthenticated } = useAuth();
-  const { getItemCount } = useCart();
+  const { getItemCount, cartAnimation } = useCart();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -47,7 +47,10 @@ function Navbar() {
 
             {(!isAuthenticated || user?.role !== 'admin') && (
               <li className="nav-item">
-                <Link className="nav-link" to="/cart">
+                <Link
+                  className={`nav-link ${cartAnimation ? 'cart-animate' : ''}`}
+                  to="/cart"
+                >
                   Cart {getItemCount() > 0 && `(${getItemCount()})`}
                 </Link>
               </li>

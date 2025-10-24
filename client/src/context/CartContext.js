@@ -12,6 +12,8 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [cartAnimation, setCartAnimation] = useState(false);
+  const [lastAddedItem, setLastAddedItem] = useState(null);
 
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
@@ -36,6 +38,14 @@ export const CartProvider = ({ children }) => {
       }
       return [...prev, { product, quantity, price: product.price }];
     });
+
+    // Trigger cart animation
+    setCartAnimation(true);
+    setLastAddedItem(product._id);
+    setTimeout(() => {
+      setCartAnimation(false);
+      setLastAddedItem(null);
+    }, 2000);
   };
 
   const removeFromCart = (productId) => {
@@ -73,7 +83,9 @@ export const CartProvider = ({ children }) => {
     updateQuantity,
     clearCart,
     getTotal,
-    getItemCount
+    getItemCount,
+    cartAnimation,
+    lastAddedItem
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

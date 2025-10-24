@@ -8,6 +8,7 @@ function Products() {
   const [error, setError] = useState('');
   const [category, setCategory] = useState('');
   const [search, setSearch] = useState('');
+  const [addedItems, setAddedItems] = useState(new Set());
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -29,6 +30,20 @@ function Products() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setAddedItems(prev => new Set(prev).add(product._id));
+
+    // Reset button after 2 seconds
+    setTimeout(() => {
+      setAddedItems(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(product._id);
+        return newSet;
+      });
+    }, 2000);
   };
 
   return (
@@ -101,11 +116,15 @@ function Products() {
                   </div>
                   <div className="card-footer bg-white border-0">
                     <button
-                      className="btn btn-primary w-100"
-                      onClick={() => addToCart(product)}
+                      className={`btn w-100 ${
+                        addedItems.has(product._id)
+                          ? 'btn-added-success btn-added'
+                          : 'btn-primary'
+                      }`}
+                      onClick={() => handleAddToCart(product)}
                       disabled={!product.available}
                     >
-                      Add to Cart
+                      {addedItems.has(product._id) ? 'Added!' : 'Add to Cart'}
                     </button>
                   </div>
                 </div>
